@@ -1,0 +1,32 @@
+Timer unit: 1e-09 s
+
+Total time: 18.4496 s
+File: /Users/baderzakaria/Desktop/CV/application/a9number_v3.py
+Function: count_occurrences_in_text at line 11
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    11                                           @profile
+    12                                           def count_occurrences_in_text(word, text):
+    13                                               """
+    14                                               Return the number of occurrences of the passed word (case insensitive) in text.
+    15                                               """
+    16      5649   19081000.0   3377.8      0.1      lower_text = text.lower()
+    17      5649    7631000.0   1350.9      0.0      lower_word = word.lower()
+    18      5649    2566000.0    454.2      0.0      count = 0 
+    19  12260897 9086207000.0    741.1     49.2      for index in range(len(lower_text) - len(lower_word) + 1):
+    20  12255248 9253171000.0    755.0     50.2          if lower_text[index:index + len(lower_word)] == lower_word:
+    21     14120    7896000.0    559.2      0.0              start_of_word = (
+    22     14120   19804000.0   1402.5      0.1                  (not (lower_text[index + len(word)].isalpha() if index + len(word) < len(lower_text) else False)) 
+    23      8686    4653000.0    535.7      0.0                  and (index == 0  
+    24     15987   13703000.0    857.1      0.1                      or not (lower_text[index - 1].isalpha()  
+    25      3653    3139000.0    859.3      0.0                           or (lower_text[index - 1] == "'" and lower_text[index - 2].isalpha() if index > 0 else False) 
+    26      3652    4789000.0   1311.3      0.0                           or (lower_text[index + len(word)] == "'" and not lower_text[index + len(word) + 1] == "'") \
+    27      8682    8278000.0    953.5      0.0                              if index + len(word) + 1 < len(lower_text) else False)
+    28                                                                    )
+    29                                                       )
+    30     14120    6614000.0    468.4      0.0              if start_of_word:
+    31      2064     962000.0    466.1      0.0                  count += 1
+    32      5649   11082000.0   1961.8      0.1      return count
+
+ 18.45 seconds - /Users/baderzakaria/Desktop/CV/application/a9number_v3.py:11 - count_occurrences_in_text

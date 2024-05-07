@@ -1,0 +1,26 @@
+Timer unit: 1e-09 s
+
+Total time: 3.26928 s
+File: /Users/baderzakaria/Desktop/CV/application/a9number_v3_updated.py
+Function: count_occurrences_in_text at line 15
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    15                                           @profile
+    16                                           def count_occurrences_in_text(word, text):
+    17                                               """
+    18                                               Return the number of occurrences of the passed word (case insensitive) in text.
+    19                                               """
+    20      5649   84810000.0  15013.3      2.6      normalized_text = str.lower(text.translate(trans_table))
+    21      5649   19526000.0   3456.5      0.6      normalized_word = str.lower(word.translate(trans_table).lower())
+    22      5649    2796000.0    495.0      0.1      count = 0
+    23      5649   46370000.0   8208.5      1.4      normalized_text=normalized_text.replace(":"," : ").replace("'''","").replace("''","")
+    24      5649  147312000.0  26077.5      4.5      text_words = normalized_text.split()
+    25      5649    6419000.0   1136.3      0.2      word_list = normalized_word.split()
+    26      5649    6716000.0   1188.9      0.2      word_length = len(word_list)
+    27   2061175 1468133000.0    712.3     44.9      for i in range(len(text_words) - word_length + 1):
+    28   2055526 1478644000.0    719.4     45.2          if text_words[i:i + word_length] == word_list:
+    29      2064     833000.0    403.6      0.0              count += 1
+    30      5649    7719000.0   1366.4      0.2      return count
+
+  3.27 seconds - /Users/baderzakaria/Desktop/CV/application/a9number_v3_updated.py:15 - count_occurrences_in_text

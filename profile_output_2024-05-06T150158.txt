@@ -1,0 +1,48 @@
+Timer unit: 1e-09 s
+
+Total time: 5.99294 s
+File: /Users/baderzakaria/Desktop/CV/application/a9number_v3_updated_multithread.py
+Function: count_occurrences_in_text at line 39
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    39                                           @profile
+    40                                           def count_occurrences_in_text(word, text):
+    41      5600   18195000.0   3249.1      0.3      if len(text)>len(word)*10 :
+    42      5600    3876000.0    692.1      0.1          num_threads=4
+    43                                               else :
+    44                                                   num_threads=1
+    45      5600   86380000.0  15425.0      1.4      normalized_text = text.translate(trans_table).lower()
+    46      5600   17357000.0   3099.5      0.3      normalized_word = word.translate(trans_table).lower()
+    47      5600  125313000.0  22377.3      2.1      text_words = normalized_text.replace(":"," : ").replace("'''","").replace("''","").split()
+    48      5600    7597000.0   1356.6      0.1      word_list = normalized_word.split()
+    49      5600    6804000.0   1215.0      0.1      text_length = len(text_words)
+    50      5600    3762000.0    671.8      0.1      chunk_size = text_length // num_threads
+    51      5600  133782000.0  23889.6      2.2      result_queue = queue.Queue()
+    52      5600    2552000.0    455.7      0.0      merge=0
+    53      5600    2633000.0    470.2      0.0      threads = []
+    54     28000   37005000.0   1321.6      0.6      for i in range(num_threads):
+    55     22400   11954000.0    533.7      0.2          start_index = i * chunk_size + merge
+    56     22400    9595000.0    428.3      0.2          merge = 0
+    57     22400   19988000.0    892.3      0.3          if i == num_threads - 1:
+    58      5600    2489000.0    444.5      0.0              end_index = text_length+merge 
+    59                                           
+    60                                                   else:
+    61     16800    9899000.0    589.2      0.2              end_index = (i + 1) * chunk_size + merge
+    62     17200   27556000.0   1602.1      0.5              while (end_index +merge) < text_length and text_words[end_index] in word_list[-1]:
+    63       400     181000.0    452.5      0.0                  end_index += 1
+    64       400    1017000.0   2542.5      0.0                  merge=+1
+    65       400   43870000.0 109675.0      0.7                  print(text_words[end_index+merge])
+    66                                           
+    67                                                   
+    68     22400  748872000.0  33431.8     12.5          thread = threading.Thread(target=count_occurrences_worker, args=(word_list, text_words, start_index, end_index, result_queue))
+    69     22400   32988000.0   1472.7      0.6          threads.append(thread)
+    70     22400 3796308000.0 169478.0     63.3          thread.start()
+    71     28000   19990000.0    713.9      0.3      for thread in threads:
+    72     22400  400081000.0  17860.8      6.7          thread.join()
+    73      5600    2184000.0    390.0      0.0      total_count = 0
+    74     28000  115757000.0   4134.2      1.9      while not result_queue.empty():
+    75     22400  292199000.0  13044.6      4.9          total_count += result_queue.get()
+    76      5600   12757000.0   2278.0      0.2      return total_count
+
+  5.99 seconds - /Users/baderzakaria/Desktop/CV/application/a9number_v3_updated_multithread.py:39 - count_occurrences_in_text
